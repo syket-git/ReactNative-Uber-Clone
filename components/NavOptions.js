@@ -2,8 +2,11 @@ import React from 'react';
 import { View, Image, Text, FlatList, TouchableOpacity } from 'react-native';
 import tw from 'tailwind-react-native-classnames';
 import { Icon } from 'react-native-elements';
+import { useNavigation } from '@react-navigation/native';
 
 function NavOptions() {
+  const navigation = useNavigation();
+
   const data = [
     {
       id: '1',
@@ -27,6 +30,7 @@ function NavOptions() {
         renderItem={({ item }) => (
           <TouchableOpacity
             style={tw`p-2 pl-6 pb-8 pt-4 bg-gray-100 m-2 w-40 text-center`}
+            onPress={() => navigation.navigate(item?.screen)}
           >
             <View>
               <Image
