@@ -3,6 +3,8 @@ import { View, Image, Text, FlatList, TouchableOpacity } from 'react-native';
 import tw from 'tailwind-react-native-classnames';
 import { Icon } from 'react-native-elements';
 import { useNavigation } from '@react-navigation/native';
+import { useSelector } from 'react-redux';
+import { selectOrigin } from '../slices/navSlice';
 
 function NavOptions() {
   const navigation = useNavigation();
@@ -21,6 +23,7 @@ function NavOptions() {
       screen: 'EatsScreen',
     },
   ];
+  const origin = useSelector(selectOrigin);
   return (
     <View>
       <FlatList
@@ -31,8 +34,9 @@ function NavOptions() {
           <TouchableOpacity
             style={tw`p-2 pl-6 pb-8 pt-4 bg-gray-100 m-2 w-40 text-center`}
             onPress={() => navigation.navigate(item?.screen)}
+            disabled={!origin}
           >
-            <View>
+            <View style={tw`${!origin && 'opacity-20'}`}>
               <Image
                 style={{ width: 120, height: 120, resizeMode: 'contain' }}
                 source={{
